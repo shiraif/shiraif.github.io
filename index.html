@@ -154,7 +154,10 @@ html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; text-size-adjust:10
 .p-pub.no-media{ grid-template-columns:1fr }
 .p-cols{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:48px }
 @media (max-width:680px){
-  .p-head{ grid-template-columns:100px minmax(0,1fr); column-gap:18px } .p-head h1{ font-size:1.75rem }
+  .p-head{ grid-template-columns:100px minmax(0,1fr); column-gap:18px; align-items:start } .p-head h1{ font-size:1.75rem; margin-top:-.22em }
+  /* photo and caption stack together in the first column, so the top of the name lines up with the top of the photo */
+  .p-head .photo-box{ display:flex; grid-column:1; grid-row:1 }
+  .paper{ gap:52px } .site[data-tpl="paper"]{ padding-bottom:32px }
   .p-role{ font-size:.9rem } .paper .bio{ font-size:.95rem } .p-head .photo-cap{ font-size:.68rem }
   .p-nav-in{ gap:12px; justify-content:space-between } .site a.p-btn{ font-size:.85rem }
   .p-pub{ grid-template-columns:1fr; gap:12px } .p-cols{ grid-template-columns:1fr }
@@ -312,12 +315,12 @@ const P = {
 const PUBS = [
   { id:"stitch", title:"Video Stitching from Multiple Moving Cameras",
     authors:["Shira Ifergane","Roy Amoyal","Shahar Ben Ishay","Oren Freifeld"],
-    venue:"NeurIPS 2026", linksTbd:true, year:"2026", badge:"NeurIPS", media:"video", file:"media/video-stitching-teaser.mp4",
+    venue:"NeurIPS 2026", linksTbd:true, soon:"Paper, code and dataset are coming soon", year:"2026", badge:"NeurIPS", media:"video", file:"media/video-stitching-teaser.mp4",
     tldr:"The first method for stitching videos from more than two freely moving cameras,<br>together with a new annotated multi-view video dataset and benchmark.",
     links:[["Paper", ""], ["Project page", ""], ["Dataset", ""], ["Code", ""]] },
   { id:"corr", title:"Unsupervised Generation of Approximate Cross-Instance Semantic-Geometric Correspondences",
     authors:["Roy Amoyal","Shira Ifergane","Oren Freifeld"],
-    venue:"NeurIPS 2026", linksTbd:true, year:"2026", badge:"NeurIPS", media:"none",
+    venue:"NeurIPS 2026", linksTbd:true, soon:"Paper and code are coming soon", year:"2026", badge:"NeurIPS", media:"none",
     links:[["Paper", ""], ["Code", ""]] },
   { id:"fastjam", title:"FastJAM: a Fast Joint Alignment Model for Images",
     authors:["Omri Hirsch*","Ron Shapira Weber*","Shira Ifergane","Oren Freifeld"],
@@ -337,6 +340,7 @@ const EDU = [
 
 const AWARDS = [
   ["International Computer Vision Summer School (ICVSS)", "2026", ""],
+  ["STEM Doctoral Fellowship", "2026", "Kreitman School of Advanced Graduate Studies"],
   ["National Fellowship for Outstanding Students in AI & Data Science", "2024 – 2026", "Council for Higher Education of Israel"],
   ["Summer Excellence Scholarship", "2024", "BGU Computer Science Department"],
   ["First Place, BrainGurion Mental Health Hackathon", "2024", "Brainstorm IL"],
@@ -368,7 +372,7 @@ const media = p => {
 };
 const photo = () => `<div class="photo-box"><div class="photo"><span>photo</span><img src="${P.photo}" alt="${P.name}"></div>${P.photoCaption ? `<p class="photo-cap">${P.photoCaption}</p>` : ""}</div>`;
 const authors = a => a.map(n => n === P.name ? `<b class="me">${n}</b>` : n).join(", ");
-const links = p => p.linksTbd ? `<p class="tbd">Paper, code and dataset are coming soon </p>` : `<div class="links">${p.links.map(([l, u]) => u ? `<a class="lnk" href="${u}" target="_blank" rel="noopener">${l}</a>` : `<span class="lnk" title="Add the ${l} link">${l}</span>`).join("")}</div>`;
+const links = p => p.linksTbd ? `<p class="tbd">${p.soon || "Links are coming soon"}</p>` : `<div class="links">${p.links.map(([l, u]) => u ? `<a class="lnk" href="${u}" target="_blank" rel="noopener">${l}</a>` : `<span class="lnk" title="Add the ${l} link">${l}</span>`).join("")}</div>`;
 const tldr = p => p.tldr ? `<p class="tldr">${p.tldr}</p>` : "";
 const rows = list => `<ul class="plain">${list.map(([a, w, s]) => `<li class="row"><span>${a}</span>${w ? `<span class="when">${w}</span>` : ""}${s ? `<span class="sub">${s}</span>` : ""}</li>`).join("")}</ul>`;
 /* logos shown instead of the link text; a link without a logo here shows its name */
