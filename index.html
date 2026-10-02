@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Shira Ifergane, Computer Science Ph.D. student at Ben-Gurion University of the Negev.">
+<title>Shira Ifergane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=IBM+Plex+Mono:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one content model rendered three ways (Paper list, Folio year-grouped list, Sidebar profile), switched from a sticky bar. */
+:root{
+  --ui-bg:#ffffff; --ui-fg:#1c1f26; --ui-muted:#626875; --ui-line:#e1e4ea; --ui-accent:#2e3f9e;
+  --page:#eef0f3; --tbd:#c62828;
+  --ui-font: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --ui-bg:#16181d; --ui-fg:#e6e8ee; --ui-muted:#9aa1ad; --ui-line:#2b2f37; --ui-accent:#aab6ff; --page:#0e1013; --tbd:#ff7a7a; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --ui-bg:#16181d; --ui-fg:#e6e8ee; --ui-muted:#9aa1ad; --ui-line:#2b2f37; --ui-accent:#aab6ff; --page:#0e1013; --tbd:#ff7a7a; color-scheme:dark }
+
+/* ---------- Template tokens ---------- */
+.site[data-tpl="paper"]{
+  --bg:#fbfcfd; --fg:#1b2230; --muted:#5b6576; --line:#dfe3ea; --accent:#3a72c0; --surface:#f1f4f8; --ph:#e9edf3; --ph2:#e0e5ed;
+  --display:"Literata", Georgia, "Times New Roman", serif; --body:"Literata", Georgia, serif; --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+.site[data-tpl="folio"]{
+  --bg:#f5f5f3; --fg:#16161a; --muted:#61616a; --line:#dbdad5; --accent:#8c1d40; --surface:#ffffff; --ph:#e6e5e1; --ph2:#dcdbd6;
+  --display:"Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif; --body:"Figtree", system-ui, sans-serif; --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+.site[data-tpl="side"]{
+  --bg:#f7f9f8; --fg:#1a2421; --muted:#56655f; --line:#d9e2de; --accent:#1c6b58; --surface:#eaf0ed; --ph:#e1e9e5; --ph2:#d7e1dc;
+  --display:"Instrument Serif", Georgia, serif; --body:"Public Sans", system-ui, sans-serif; --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+.site[data-tpl="ap"]{
+  --bg:#ffffff; --fg:#3d4144; --muted:#6f777d; --line:#e3e6e8; --accent:#1f7a94; --surface:#f6f8f9; --ph:#eef1f3; --ph2:#e5e9ec;
+  --display:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --body:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .site[data-tpl="ap"]{ --bg:#1b1d20; --fg:#d7dadd; --muted:#9aa1a7; --line:#2d3136; --accent:#6cc6df; --surface:#222529; --ph:#25292e; --ph2:#2b3036 }
+  :root:not([data-theme="light"]) .site[data-tpl="paper"]{ --bg:#12161d; --fg:#e4e8ef; --muted:#9aa4b4; --line:#2a313d; --accent:#94b3ff; --surface:#1a2029; --ph:#1c232e; --ph2:#222a36 }
+  :root:not([data-theme="light"]) .site[data-tpl="folio"]{ --bg:#0f0f11; --fg:#ececef; --muted:#9b9ba4; --line:#2a2a30; --accent:#f29ab4; --surface:#18181c; --ph:#1e1e22; --ph2:#26262b }
+  :root:not([data-theme="light"]) .site[data-tpl="side"]{ --bg:#111715; --fg:#e2ebe7; --muted:#95a59f; --line:#26312d; --accent:#72d2b6; --surface:#17201d; --ph:#1b2522; --ph2:#212c28 }
+}
+:root[data-theme="dark"] .site[data-tpl="paper"]{ --bg:#12161d; --fg:#e4e8ef; --muted:#9aa4b4; --line:#2a313d; --accent:#94b3ff; --surface:#1a2029; --ph:#1c232e; --ph2:#222a36 }
+:root[data-theme="dark"] .site[data-tpl="folio"]{ --bg:#0f0f11; --fg:#ececef; --muted:#9b9ba4; --line:#2a2a30; --accent:#f29ab4; --surface:#18181c; --ph:#1e1e22; --ph2:#26262b }
+:root[data-theme="dark"] .site[data-tpl="ap"]{ --bg:#1b1d20; --fg:#d7dadd; --muted:#9aa1a7; --line:#2d3136; --accent:#6cc6df; --surface:#222529; --ph:#25292e; --ph2:#2b3036 }
+:root[data-theme="dark"] .site[data-tpl="side"]{ --bg:#111715; --fg:#e2ebe7; --muted:#95a59f; --line:#26312d; --accent:#72d2b6; --surface:#17201d; --ph:#1b2522; --ph2:#212c28 }
+
+body{ background:var(--page); color:var(--ui-fg); font-family:var(--ui-font) }
+
+/* ---------- Template switcher ---------- */
+.bar{ position:sticky; top:env(safe-area-inset-top,0px); z-index:10; background:var(--ui-bg); border-bottom:1px solid var(--ui-line); padding-inline:16px; padding-block:10px }
+.bar-in{ max-width:1120px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:8px 16px }
+.bar-label{ font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ui-muted); font-weight:600 }
+.seg{ display:flex; gap:4px; background:var(--page); padding:3px; border-radius:9px }
+.seg button{ font:inherit; font-size:.86rem; font-weight:500; border:0; background:transparent; color:var(--ui-muted); padding:6px 12px; border-radius:7px; cursor:pointer }
+.seg button[aria-pressed="true"]{ background:var(--ui-bg); color:var(--ui-fg); box-shadow:0 1px 2px rgb(0 0 0 / .12) }
+.seg button:focus-visible, .copy:focus-visible{ outline:2px solid var(--ui-accent); outline-offset:2px }
+.font-pick{ font:inherit; font-size:.86rem; color:var(--ui-fg); background:var(--page); border:1px solid var(--ui-line); border-radius:8px; padding:6px 8px; max-width:100% }
+.font-pick:focus-visible{ outline:2px solid var(--ui-accent); outline-offset:2px }
+.bar-desc{ font-size:.84rem; color:var(--ui-muted); flex:1 1 260px; min-width:0 }
+
+/* ---------- Shared site pieces ---------- */
+.site{ background:var(--bg); color:var(--fg); font-family:var(--body); padding-inline:16px; padding-block:40px 72px; line-height:1.6; transition:opacity .18s ease }
+.site.fading{ opacity:0 }
+@media (prefers-reduced-motion: reduce){ .site{ transition:none } }
+.site h1, .site h2, .site h3{ text-wrap:balance; margin:0 }
+.site p{ margin:0 }
+.site a{ color:var(--accent); text-underline-offset:3px }
+.mono{ font-family:var(--mono) }
+.sel{ user-select:all }
+.me{ color:var(--fg); font-weight:600 }
+.authors{ color:var(--muted); font-size:.93rem }
+.tldr{ font-size:.95rem }
+.todo-text{ color:var(--muted); font-style:italic }
+.links{ display:flex; flex-wrap:wrap; gap:6px }
+.lnk{ font-family:var(--mono); font-size:.74rem; letter-spacing:.02em; padding:3px 9px; border:1px dashed var(--line); border-radius:999px; color:var(--muted) }
+.tbd{ color:var(--muted); font-size:.88rem }
+a.lnk{ border-style:solid; color:var(--accent); text-decoration:none }
+.note{ font-size:.82rem; color:var(--muted) }
+ul.plain{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px }
+.row{ display:grid; grid-template-columns:minmax(0,1fr) auto; gap:0 16px; align-items:baseline }
+.row .when{ font-family:var(--mono); font-size:.8rem; color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap }
+.row .sub{ grid-column:1 / -1; color:var(--muted); font-size:.9rem; line-height:1.3 }
+@media (max-width:520px){ .row{ grid-template-columns:1fr } .row .when{ order:-1 } }
+
+/* media placeholders */
+.media{ position:relative; margin:0; aspect-ratio:16/9; width:100%; max-width:100%; border:1.5px dashed var(--line); border-radius:8px; overflow:hidden; display:grid; place-items:center; color:var(--muted);
+  background:repeating-linear-gradient(135deg, var(--ph) 0 10px, var(--ph2) 10px 20px) }
+.ph{ display:flex; flex-direction:column; align-items:center; gap:4px; text-align:center; padding:8px 12px; background:var(--bg); border-radius:8px; max-width:90% }
+.ph svg{ width:26px; height:26px }
+.ph svg.cams{ width:44px; height:28px }
+.ph-label{ font-size:.8rem; font-weight:600; color:var(--fg); font-family:var(--body) }
+.ph code{ font-family:var(--mono); font-size:.7rem; word-break:break-all }
+.tc{ position:absolute; left:8px; bottom:8px; font-family:var(--mono); font-size:.68rem; background:var(--bg); color:var(--fg); padding:1px 6px; border-radius:4px; font-variant-numeric:tabular-nums }
+.media video{ pointer-events:none; position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .3s ease }
+.media.playing video{ opacity:1 }
+.media.playing .ph{ display:none }
+.photo{ aspect-ratio:1; max-width:100%; border:1.5px dashed var(--line); display:grid; place-items:center; color:var(--muted); font-size:.78rem; font-family:var(--mono);
+  background:repeating-linear-gradient(135deg, var(--ph) 0 8px, var(--ph2) 8px 16px) }
+.photo{ position:relative; overflow:hidden }
+.photo-box{ display:flex; flex-direction:column; gap:6px; min-width:0; max-width:100% }
+.photo-box .photo{ width:100% !important }
+.photo-cap{ font-size:.76rem; line-height:1.35; color:var(--muted); font-style:italic; text-align:center; font-family:var(--body) }
+.photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover }
+.photo span{ background:var(--bg); padding:2px 8px; border-radius:4px }
+
+/* ---------- Template 1: Paper ---------- */
+.paper{ max-width:860px; margin:0 auto; display:flex; flex-direction:column; gap:64px }
+.p-head{ display:grid; grid-template-columns:140px minmax(0,1fr); column-gap:28px; row-gap:6px; align-items:center }
+.p-head .photo{ border-radius:6px; grid-column:1; grid-row:1 }
+/* caption sits under the photo in its own row, so the name and links center on the photo alone */
+.p-head .photo-box{ display:contents }
+.p-head .photo-cap{ grid-column:1; grid-row:2; align-self:start }
+.p-head > div:last-child{ grid-column:2; grid-row:1 }
+.p-head h1{ font-family:var(--display); font-size:2.4rem; font-weight:600; letter-spacing:-.01em; line-height:1.1 }
+.p-role{ color:var(--muted); margin-top:12px !important }
+.p-role + .p-role{ margin-top:0 !important }
+.p-contact{ display:flex; flex-wrap:wrap; gap:4px 14px; margin-top:10px !important; font-size:.92rem }
+.p-contact .mono{ font-size:.82rem }
+.site a.logo-link{ display:inline-flex; align-items:center; align-self:center; line-height:0 }
+.site a.logo-link svg{ width:20px; height:20px; fill:#666; transition:fill .15s }
+.site a.logo-link:hover svg{ fill:#333 }
+.paper h2{ font-family:var(--display); font-size:1.35rem; font-weight:600; margin-bottom:18px }
+.paper .bio{ display:flex; flex-direction:column; gap:12px; max-width:75ch; font-size:1.02rem }
+.p-head + .bio{ margin-top:-24px }  /* About belongs with the header: 40px instead of the 64px section gap */
+.site .bio p{ text-wrap:pretty }
+.p-news .when{ min-width:3.5em }
+.p-news li{ display:grid; grid-template-columns:3.5em minmax(0,1fr); gap:12px }
+.p-pubs{ display:flex; flex-direction:column; gap:30px }
+.p-pub{ display:grid; grid-template-columns:minmax(0,260px) minmax(0,1fr); gap:24px; align-items:start }
+.p-pub .txt{ display:flex; flex-direction:column; gap:5px; min-width:0 }
+.p-pub .tldr + .tbd{ margin-top:-4px }
+.p-pub h3{ font-family:var(--display); font-size:1.05rem; font-weight:600; line-height:1.35 }
+.p-num{ color:var(--muted); font-variant-numeric:tabular-nums; margin-right:.35em }
+.p-venue{ font-weight:700; font-size:.93rem; color:var(--accent) }
+.paper .lnk{ border:0; padding:0; border-radius:0 }
+.paper a.lnk{ color:var(--accent) }
+.paper a.lnk:hover{ text-decoration:underline }
+/* section buttons across the top; they stay in view while scrolling */
+html{ scroll-behavior:smooth }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto } }
+.p-nav{ position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line); margin:-40px -16px 40px; padding:8px 12px }
+.p-nav-in{ max-width:868px; margin:0 auto; display:flex; gap:28px; padding:4px; overflow-x:auto; scrollbar-width:none }
+.p-nav-in::-webkit-scrollbar{ display:none }
+.site a.p-btn{ flex:none; font-family:var(--body); font-size:.95rem; font-weight:600; line-height:1.4; color:var(--fg); text-decoration:none; padding:6px 2px; transition:color .15s }
+.site a.p-btn:hover{ color:var(--accent) }
+.site a.p-btn:focus-visible{ outline:2px solid var(--accent); outline-offset:2px }
+.paper [id]{ scroll-margin-top:80px }
+.paper .lnk::before{ content:"[" } .paper .lnk::after{ content:"]" }
+.paper .links{ gap:10px; margin-top:2px }
+.p-pub.no-media{ grid-template-columns:1fr }
+.p-cols{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:48px }
+@media (max-width:680px){
+  .p-head{ grid-template-columns:100px minmax(0,1fr); column-gap:18px } .p-head h1{ font-size:1.9rem }
+  .p-pub{ grid-template-columns:1fr; gap:12px } .p-cols{ grid-template-columns:1fr }
+}
+
+/* ---------- Template 2: Folio ---------- */
+.folio{ max-width:940px; margin:0 auto; display:flex; flex-direction:column; gap:52px }
+.o-head h1{ font-family:var(--display); font-weight:700; font-size:clamp(2.2rem, 5.5vw, 3.2rem); letter-spacing:-.025em; line-height:1.05 }
+.o-head h1 .first{ font-weight:500; color:var(--accent) }
+.o-role{ color:var(--muted); margin-top:8px !important; font-size:1rem }
+.o-about{ display:grid; grid-template-columns:minmax(0,1fr) 200px; gap:36px; align-items:start }
+.o-about .bio{ display:flex; flex-direction:column; gap:12px; max-width:64ch; font-size:1.02rem }
+.o-card{ display:flex; flex-direction:column; gap:10px; font-size:.86rem }
+.o-card .photo{ border-radius:8px }
+.o-card .mono{ font-size:.76rem; word-break:break-all }
+.o-card .o-links{ display:flex; flex-wrap:wrap; gap:4px 12px }
+.folio h2{ font-family:var(--display); font-weight:700; font-size:1.5rem; letter-spacing:-.01em; padding-bottom:8px; border-bottom:2px solid var(--fg); margin-bottom:22px }
+.o-news li{ display:grid; grid-template-columns:4.5em minmax(0,1fr); gap:14px }
+.o-year{ font-family:var(--mono); font-size:.8rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:500; margin:28px 0 14px !important }
+.o-year:first-of-type{ margin-top:0 !important }
+.o-group{ display:flex; flex-direction:column; gap:26px }
+.o-pub{ display:grid; grid-template-columns:92px minmax(0,210px) minmax(0,1fr); gap:20px; align-items:start }
+.o-badge{ font-family:var(--mono); font-size:.72rem; font-weight:500; text-align:center; padding:4px 6px; border-radius:4px; background:var(--accent); color:var(--bg); letter-spacing:.03em }
+.o-badge.review{ background:var(--surface); color:var(--muted); border:1px solid var(--line) }
+.o-pub .txt{ display:flex; flex-direction:column; gap:5px; min-width:0 }
+.o-pub h3{ font-family:var(--body); font-size:1.04rem; font-weight:600; line-height:1.35 }
+.o-venue{ font-weight:700; font-size:.9rem; color:var(--accent) }
+.o-pub.no-media{ grid-template-columns:92px minmax(0,1fr) }
+.o-cv{ display:flex; flex-direction:column; gap:44px }
+.o-cv h2{ font-size:1.25rem }
+.o-wide{ grid-column:1 / -1 }
+@media (max-width:760px){
+  .o-about{ grid-template-columns:1fr } .o-card{ flex-direction:row; flex-wrap:wrap; align-items:center } .o-card .photo-box{ width:120px }
+  .o-pub{ grid-template-columns:1fr; gap:10px } .o-badge{ justify-self:start } .o-cv{ grid-template-columns:1fr }
+}
+
+/* ---------- Template 4: Academic Pages ---------- */
+.site[data-tpl="ap"]{ padding-block:0 72px }
+.ap-mast{ border-bottom:1px solid var(--line); margin-inline:-16px; padding-inline:16px; margin-bottom:40px }
+.ap-mast-in{ max-width:1180px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:6px 28px; padding-block:16px }
+.site .ap-title{ font-family:var(--display); font-weight:700; font-size:1.15rem; color:var(--fg); text-decoration:none }
+.ap-nav{ display:flex; flex-wrap:wrap; gap:4px 22px; font-size:.95rem }
+.site .ap-nav a{ color:var(--muted); text-decoration:none }
+.site .ap-nav a:hover{ color:var(--accent) }
+.ap-wrap{ max-width:1180px; margin:0 auto; display:grid; grid-template-columns:250px minmax(0,1fr); gap:48px; align-items:start }
+.ap-side{ position:sticky; top:calc(env(safe-area-inset-top,0px) + 72px); display:flex; flex-direction:column; gap:10px; font-size:.9rem }
+.ap-side .photo{ border-radius:50%; border:0 }
+.ap-side .photo-box{ width:150px }
+.ap-side h2{ font-family:var(--display); font-size:1.3rem; font-weight:700; margin-top:6px }
+.ap-side .ap-tag{ color:var(--muted) }
+.ap-meta{ list-style:none; margin:6px 0 0; padding:0; display:flex; flex-direction:column; gap:9px }
+.ap-meta li{ display:flex; gap:10px; align-items:center; min-width:0 }
+.ap-meta svg{ width:16px; height:16px; flex:none; color:var(--muted) }
+.ap-meta .mono{ font-size:.8rem; word-break:break-all }
+.ap-main{ display:flex; flex-direction:column; gap:44px; min-width:0 }
+.ap-main h1{ font-family:var(--display); font-size:1.9rem; font-weight:700; margin-bottom:16px }
+.ap-main h2{ font-family:var(--display); font-size:1.4rem; font-weight:700; padding-bottom:8px; border-bottom:1px solid var(--line); margin-bottom:20px }
+.ap-main .bio{ display:flex; flex-direction:column; gap:12px; max-width:70ch; font-size:1.02rem }
+.ap-main section{ scroll-margin-top:72px }
+.ap-pubs{ display:flex; flex-direction:column; gap:28px }
+.ap-pub{ display:grid; grid-template-columns:minmax(0,230px) minmax(0,1fr); gap:22px; align-items:start }
+.ap-pub.no-media{ grid-template-columns:1fr }
+.ap-pub .txt{ display:flex; flex-direction:column; gap:5px; min-width:0 }
+.ap-pub h3{ font-family:var(--display); font-size:1.08rem; font-weight:600; color:var(--accent); line-height:1.35 }
+.ap-pub .ap-in{ font-size:.93rem; color:var(--muted) }
+.ap-pub .ap-in b{ color:var(--accent); font-weight:700 }
+@media (max-width:880px){
+  .ap-wrap{ grid-template-columns:1fr; gap:28px }
+  .ap-side{ position:static; display:grid; grid-template-columns:96px minmax(0,1fr); column-gap:18px; align-items:center }
+  .ap-side .photo-box{ width:96px; grid-row:span 2 }
+  .ap-meta{ grid-column:1 / -1 }
+  .ap-pub{ grid-template-columns:1fr; gap:12px }
+}
+
+/* ---------- Template 3: Sidebar ---------- */
+.side-wrap{ max-width:1120px; margin:0 auto; display:grid; grid-template-columns:280px minmax(0,1fr); gap:56px; align-items:start }
+.s-aside{ position:sticky; top:calc(env(safe-area-inset-top,0px) + 76px); display:flex; flex-direction:column; gap:12px; background:var(--surface); padding:22px; border-radius:16px }
+.s-aside .photo{ aspect-ratio:4/5; border-radius:10px }
+.s-aside h1{ font-family:var(--display); font-weight:400; font-size:2.5rem; line-height:1; margin-top:6px }
+.s-meta{ font-size:.9rem; color:var(--muted); display:flex; flex-direction:column; gap:2px }
+.s-email{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:.8rem; padding-top:12px; border-top:1px solid var(--line) }
+.copy{ font:inherit; font-size:.75rem; font-family:var(--body); font-weight:600; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:6px; padding:3px 9px; cursor:pointer }
+.s-links{ display:flex; flex-wrap:wrap; gap:6px 14px; font-size:.9rem }
+.s-main{ display:flex; flex-direction:column; gap:52px; min-width:0 }
+.s-main h2{ font-family:var(--display); font-weight:400; font-size:2rem; line-height:1.1; margin-bottom:18px }
+.s-main .bio{ display:flex; flex-direction:column; gap:12px; max-width:66ch; font-size:1.02rem }
+.s-news li{ display:grid; grid-template-columns:3.6em minmax(0,1fr); gap:14px; padding-left:14px; border-left:2px solid var(--line) }
+.s-pubs{ display:flex; flex-direction:column }
+.s-pub{ display:grid; grid-template-columns:minmax(0,220px) minmax(0,1fr); gap:24px; padding-block:24px; border-top:1px solid var(--line) }
+.s-pub:first-child{ border-top:0; padding-top:0 }
+.s-pub .txt{ display:flex; flex-direction:column; gap:6px; min-width:0 }
+.s-pub h3{ font-size:1.05rem; font-weight:600; line-height:1.35 }
+.s-venue{ font-size:.9rem; color:var(--accent); font-weight:700 }
+.side-wrap .lnk{ border-style:solid }
+.s-pub.no-media{ grid-template-columns:1fr }
+.s-cols{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:44px }
+.s-cv h2{ font-size:1.6rem }
+@media (max-width:880px){
+  .side-wrap{ grid-template-columns:1fr; gap:40px } .s-aside{ position:static } .s-aside .photo-box{ width:140px }
+  .s-pub{ grid-template-columns:1fr; gap:12px } .s-cols{ grid-template-columns:1fr }
+}
+</style>
+<style>body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<div class="bar" role="region" aria-label="Template picker">
+  <div class="bar-in">
+    <span class="bar-label">Template</span>
+    <div class="seg" role="group" aria-label="Choose a template">
+      <button type="button" id="tpl-paper" data-tpl="paper">1 · Paper</button>
+      <button type="button" id="tpl-folio" data-tpl="folio">2 · Folio</button>
+      <button type="button" id="tpl-side" data-tpl="side">3 · Sidebar</button>
+      <button type="button" id="tpl-ap" data-tpl="ap">4 · Academic Pages</button>
+    </div>
+    <label class="bar-label" for="font-pick">Font</label>
+    <select id="font-pick" class="font-pick"></select>
+    <label class="bar-label" for="color-pick">Colors</label>
+    <select id="color-pick" class="font-pick"></select>
+    <p class="bar-desc" id="bar-desc"></p>
+  </div>
+</div>
+
+<main class="site" id="site" data-tpl="paper"></main>
+
+<script>
+/* ===== SETTINGS =====
+   TEMPLATE: which design your site uses: "paper", "folio", "side" or "ap" (Academic Pages).
+   SHOW_PICKER: true shows the template switcher bar at the top (useful while choosing). */
+const TEMPLATE = "paper";
+const SHOW_PICKER = false;
+/* FONT: any key from the FONTS list further down, e.g. "ss_sans", "lato", "charis",
+   "garamond", "crimson", "ptserif", or "default" (the template's own fonts) */
+const FONT = "lato";
+/* COLORS: "default" (template colors, with dark mode), "ink", "mono", "navy", "sky", "teal",
+   "forest", "burgundy", "plum", "graphite" or "stone" (light palettes) */
+const COLORS = "default";
+const P = {
+  name: "Shira Ifergane",
+  email: "shiraif@post.bgu.ac.il",
+  role: "Computer Science Ph.D. student",
+  affil: "Ben-Gurion University of the Negev",
+  group: "Vision, Inference, and Learning (VIL) Group",
+  advisor: "Prof. Oren Freifeld",
+  interests: "Computer Vision · Deep Learning",
+  bio: [
+    "I am a Computer Science Ph.D. student at Ben-Gurion University of the Negev (BGU), working in The Vision, Inference, and Learning (VIL) Group under the supervision of <a href=\"https://www.orenfreifeld.com/research.htm\" target=\"_blank\" rel=\"noopener\">Prof. Oren Freifeld</a>."
+  ],
+  photo: "media/photo.jpg",
+  photoCaption: "The photo is upright.",
+  links: [["Google Scholar", "https://scholar.google.com/citations?user=sjDMed4AAAAJ&hl=en"], ["LinkedIn", "https://www.linkedin.com/in/shira-ifergane/"]]  /* put your URLs in the second slot */
+};
+
+const PUBS = [
+  { id:"stitch", title:"Video Stitching from Multiple Moving Cameras",
+    authors:["Shira Ifergane","Roy Amoyal","Shahar Benishay","Oren Freifeld"],
+    venue:"NeurIPS 2026", linksTbd:true, year:"2026", badge:"NeurIPS", media:"video", file:"media/video-stitching-teaser.mp4",
+    tldr:"The first method for stitching videos from more than two freely moving cameras,<br>together with a new annotated multi-view video dataset and benchmark.",
+    links:[["Paper", ""], ["Project page", ""], ["Dataset", ""], ["Code", ""]] },
+  { id:"corr", title:"Unsupervised Generation of Approximate Cross-Instance Semantic-Geometric Correspondences",
+    authors:["Roy Amoyal","Shira Ifergane","Oren Freifeld"],
+    venue:"NeurIPS 2026", linksTbd:true, year:"2026", badge:"NeurIPS", media:"none",
+    links:[["Paper", ""], ["Code", ""]] },
+  { id:"fastjam", title:"FastJAM: a Fast Joint Alignment Model for Images",
+    authors:["Omri Hirsch*","Ron Shapira Weber*","Shira Ifergane","Oren Freifeld"],
+    venue:"NeurIPS 2025", year:"2025", badge:"NeurIPS", media:"none",
+    links:[["Paper", "https://arxiv.org/pdf/2510.22842"], ["Code", "https://github.com/BGU-CS-VIL/FastJAM"], ["Project page", "https://bgu-cs-vil.github.io/FastJAM/"]] },
+  { id:"act", title:"Trainable Highly-expressive Activation Functions",
+    authors:["Irit Chelly*","Shahaf E. Finder*","Shira Ifergane","Oren Freifeld"],
+    venue:"ECCV 2024", year:"2024", badge:"ECCV", media:"none",
+    links:[["Paper", "https://arxiv.org/abs/2407.07564"], ["Code", "https://github.com/BGU-CS-VIL/DiTAC"]] }
+];
+
+const EDU = [
+  ["Ph.D., Computer Science", "2026 – present", "Ben-Gurion University of the Negev"],
+  ["M.Sc., Computer Science", "2024 – 2026", "Ben-Gurion University of the Negev<br>GPA 91 · First-Year Academic Excellence Award"],
+  ["B.Sc., Computer Science", "2021 – 2024", "Ben-Gurion University of the Negev<br>GPA 93 · magna cum laude"]
+];
+
+const AWARDS = [
+  ["International Computer Vision Summer School (ICVSS)", "2026", ""],
+  ["National Fellowship for Outstanding Students in AI & Data Science", "2024 – 2026", "Council for Higher Education of Israel"],
+  ["Summer Excellence Scholarship", "2024", "BGU Computer Science Department"],
+  ["First Place, BrainGurion Mental Health Hackathon", "2024", "Brainstorm IL"],
+  ["Dkalim Excellence Program (Scholarship)", "2022 – 2024", "BGU Faculty of Natural Sciences"]
+];
+
+const TEACH = [
+  ["Introduction to Machine Learning", "", "Teaching Assistant · Fall 2024, Fall 2026"],
+  ["Design of Algorithms", "", "Teaching Assistant · Spring 2025, Fall 2025, Spring 2026"]
+];
+
+const ICON = {
+  play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>',
+  image: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></svg>',
+  cams: '<svg class="cams" viewBox="0 0 32 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="3" width="13" height="10" rx="1.5"/><rect x="9.5" y="7" width="13" height="10" rx="1.5"/><rect x="18" y="3" width="13" height="10" rx="1.5"/></svg>'
+};
+
+/* Videos are real <video> elements that autoplay muted on a loop. The striped placeholder
+   shows until the file at p.file loads. Images: replace the placeholder with <img src="media/..." alt="..."> */
+const media = p => {
+  if (p.media === "none") return "";
+  const vid = p.media === "video";
+  return `<figure class="media" aria-label="${vid ? "Looping video" : "Image placeholder"} for ${p.title}">
+    ${vid ? `<video data-src="${window.PREVIEW_VIDEO || p.file}" autoplay muted loop playsinline preload="auto" disablepictureinpicture disableremoteplayback aria-hidden="true"></video>` : ""}
+    <div class="ph">${p.id === "stitch" ? ICON.cams : vid ? ICON.play : ICON.image}
+      <span class="ph-label">${vid ? "Teaser video · plays on loop" : "Figure placeholder"}</span>
+      <code>${p.file}</code></div>
+  </figure>`;
+};
+const photo = () => `<div class="photo-box"><div class="photo"><span>photo</span><img src="${P.photo}" alt="${P.name}"></div>${P.photoCaption ? `<p class="photo-cap">${P.photoCaption}</p>` : ""}</div>`;
+const authors = a => a.map(n => n === P.name ? `<b class="me">${n}</b>` : n).join(", ");
+const links = p => p.linksTbd ? `<p class="tbd">Paper, code and dataset links: TBD</p>` : `<div class="links">${p.links.map(([l, u]) => u ? `<a class="lnk" href="${u}" target="_blank" rel="noopener">${l}</a>` : `<span class="lnk" title="Add the ${l} link">${l}</span>`).join("")}</div>`;
+const tldr = p => p.tldr ? `<p class="tldr">${p.tldr}</p>` : "";
+const rows = list => `<ul class="plain">${list.map(([a, w, s]) => `<li class="row"><span>${a}</span>${w ? `<span class="when">${w}</span>` : ""}${s ? `<span class="sub">${s}</span>` : ""}</li>`).join("")}</ul>`;
+/* logos shown instead of the link text; a link without a logo here shows its name */
+const MAIL = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`;
+const LOGOS = {
+  "Google Scholar": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>`,
+  "LinkedIn": `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`
+};
+const extLinks = () => P.links.map(([l, u]) => {
+  const body = LOGOS[l] || l, cls = LOGOS[l] ? ` class="logo-link" aria-label="${l}"` : "";
+  return u ? `<a href="${u}" target="_blank" rel="noopener" title="${l}"${cls}>${body}</a>` : `<a href="#" onclick="return false" title="Add your ${l} URL"${cls}>${body}</a>`;
+}).join("");
+
+const R = {
+  paper: () => `<nav class="p-nav" aria-label="Sections"><div class="p-nav-in">
+    ${[["about", "About"], ["publications", "Publications"], ["education", "Education"], ["awards", "Awards"], ["teaching", "Teaching"]].map(([id, l]) => `<a class="p-btn" href="#${id}">${l}</a>`).join("")}
+  </div></nav>
+  <div class="paper">
+    <header class="p-head" id="about">
+      ${photo()}
+      <div>
+        <h1>${P.name}</h1>
+        <p class="p-role">Computer Science Ph.D. student at Ben-Gurion University of the Negev</p>
+        <p class="p-role">${P.interests}</p>
+        <p class="p-contact"><a href="mailto:${P.email}" class="logo-link" title="${P.email}" aria-label="Email">${MAIL}</a>${extLinks()}</p>
+      </div>
+    </header>
+    <section class="bio">${P.bio.map(b => `<p>${b}</p>`).join("")}</section>
+    <section id="publications">
+      <h2>Publications</h2>
+      <div class="p-pubs">${PUBS.map((p, i) => `<article class="p-pub${p.media === "none" ? " no-media" : ""}">${media(p)}
+        <div class="txt"><h3><span class="p-num">${i + 1}.</span>${p.title}</h3><p class="authors">${authors(p.authors)}</p>
+        <p class="p-venue ${p.review ? "review" : ""}">${p.venue}</p>${tldr(p)}${links(p)}</div></article>`).join("")}</div>
+      <p class="note" style="margin-top:20px">* Equal contribution</p>
+    </section>
+    <section id="education"><h2>Education</h2>${rows(EDU)}</section>
+    <section id="awards"><h2>Fellowships, Awards &amp; Academic Programs</h2>${rows(AWARDS)}</section>
+    <section id="teaching"><h2>Teaching</h2>${rows(TEACH)}</section>
+  </div>`,
+
+  folio: () => {
+    const years = [...new Set(PUBS.map(p => p.year))];
+    return `<div class="folio">
+    <header class="o-head">
+      <h1><span class="first">Shira</span> Ifergane</h1>
+      <p class="o-role">${P.role} · ${P.group} · ${P.affil}</p>
+      <p class="o-role">${P.interests}</p>
+    </header>
+    <div class="o-about">
+      <div class="bio">${P.bio.map(b => `<p>${b}</p>`).join("")}</div>
+      <div class="o-card">${photo()}
+        <div><span class="mono sel">${P.email}</span><div class="o-links">${extLinks()}</div></div></div>
+    </div>
+    <section>
+      <h2>Publications</h2>
+      ${years.map(y => `<h3 class="o-year">${y}</h3><div class="o-group">${PUBS.filter(p => p.year === y).map(p => `<article class="o-pub${p.media === "none" ? " no-media" : ""}">
+        <span class="o-badge ${p.review ? "review" : ""}">${p.badge}</span>${media(p)}
+        <div class="txt"><h3>${p.title}</h3><p class="authors">${authors(p.authors)}</p>
+        <p class="o-venue">${p.venue}</p>${tldr(p)}${links(p)}</div></article>`).join("")}</div>`).join("")}
+      <p class="note" style="margin-top:20px">* Equal contribution</p>
+    </section>
+    <div class="o-cv">
+      <section><h2>Education</h2>${rows(EDU)}</section>
+      <section><h2>Fellowships, Awards &amp; Academic Programs</h2>${rows(AWARDS)}</section>
+      <section><h2>Teaching</h2>${rows(TEACH)}</section>
+    </div>
+  </div>`;
+  },
+
+  side: () => `<div class="side-wrap">
+    <aside class="s-aside">
+      ${photo()}
+      <h1>${P.name}</h1>
+      <div class="s-meta"><span>${P.role}</span><span>${P.affil}</span><span>${P.interests}</span><span>Advisor: ${P.advisor}</span></div>
+      <div class="s-links">${extLinks()}</div>
+      <div class="s-email"><span class="mono sel" id="email-text">${P.email}</span><button type="button" class="copy" id="copy-email">Copy</button></div>
+    </aside>
+    <div class="s-main">
+      <section><h2>About</h2><div class="bio">${P.bio.map(b => `<p>${b}</p>`).join("")}</div></section>
+      <section>
+        <h2>Publications</h2>
+        <div class="s-pubs">${PUBS.map(p => `<article class="s-pub${p.media === "none" ? " no-media" : ""}">${media(p)}
+          <div class="txt"><span class="s-venue ${p.review ? "review" : ""}">${p.venue}</span><h3>${p.title}</h3>
+          <p class="authors">${authors(p.authors)}</p>${tldr(p)}${links(p)}</div></article>`).join("")}</div>
+        <p class="note" style="margin-top:8px">* Equal contribution</p>
+      </section>
+      <section class="s-cv"><h2>Education</h2>${rows(EDU)}</section>
+      <section class="s-cv"><h2>Fellowships, Awards &amp; Academic Programs</h2>${rows(AWARDS)}</section>
+      <section class="s-cv"><h2>Teaching</h2>${rows(TEACH)}</section>
+    </div>
+  </div>`,
+
+  ap: () => {
+    const I = {
+      uni: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M7 11.5V16c0 1.5 2.2 3 5 3s5-1.5 5-3v-4.5"/></svg>',
+      mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+      link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>'
+    };
+    const ext = P.links.map(([l, u]) => `<li>${I.link}${u ? `<a href="${u}" target="_blank" rel="noopener">${l}</a>` : `<a href="#" onclick="return false" title="Add your ${l} URL">${l}</a>`}</li>`).join("");
+    return `<header class="ap-mast"><div class="ap-mast-in">
+      <a class="ap-title" href="#ap-about">${P.name}</a>
+      <nav class="ap-nav" aria-label="Sections"><a href="#ap-publications">Publications</a><a href="#ap-education">Education</a><a href="#ap-awards">Awards</a><a href="#ap-teaching">Teaching</a></nav>
+    </div></header>
+    <div class="ap-wrap">
+      <aside class="ap-side">
+        ${photo()}
+        <div><h2>${P.name}</h2><p class="ap-tag">${P.role}</p><p class="ap-tag">${P.interests}</p></div>
+        <ul class="ap-meta">
+          <li>${I.uni}<span>${P.affil}</span></li>
+          <li>${I.mail}<span class="mono sel">${P.email}</span></li>
+          ${ext}
+        </ul>
+      </aside>
+      <div class="ap-main">
+        <section id="ap-about"><h1>About me</h1><div class="bio">${P.bio.map(b => `<p>${b}</p>`).join("")}</div></section>
+        <section id="ap-publications">
+          <h2>Publications</h2>
+          <div class="ap-pubs">${PUBS.map(p => `<article class="ap-pub${p.media === "none" ? " no-media" : ""}">${media(p)}
+            <div class="txt"><h3>${p.title}</h3><p class="ap-in">Published in <b>${p.venue}</b></p>
+            <p class="authors">${authors(p.authors)}</p>${tldr(p)}${links(p)}</div></article>`).join("")}</div>
+          <p class="note" style="margin-top:18px">* Equal contribution</p>
+        </section>
+        <section id="ap-education"><h2>Education</h2>${rows(EDU)}</section>
+        <section id="ap-awards"><h2>Fellowships, Awards &amp; Academic Programs</h2>${rows(AWARDS)}</section>
+        <section id="ap-teaching"><h2>Teaching</h2>${rows(TEACH)}</section>
+      </div>
+    </div>`;
+  }
+};
+
+const DESC = {
+  paper: "Classic academic list: thumbnail beside each paper, reads like a CV. Dashed boxes and grey links are placeholders.",
+  folio: "Modern academic (al-folio style): publications grouped by year with venue badges. Dashed boxes and grey links are placeholders.",
+  side: "Profile sidebar that stays in view while the publications scroll. Dashed boxes and grey links are placeholders.",
+  ap: "Academic Pages style: top navigation, round profile photo with contact details on the left, “Published in” lines. Dashed boxes and grey links are placeholders."
+};
+
+const site = document.getElementById("site");
+const btns = [...document.querySelectorAll(".seg button")];
+
+function wireCopy(){
+  const b = document.getElementById("copy-email");
+  if (!b) return;
+  b.addEventListener("click", () => {
+    const done = () => { b.textContent = "Copied"; setTimeout(() => b.textContent = "Copy", 1500); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById("email-text")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Selected"; setTimeout(() => b.textContent = "Copy", 1500); };
+    try { navigator.clipboard.writeText(P.email).then(done, fallback); } catch (e) { fallback(); }
+  });
+}
+
+/* Autoplay: browsers only allow videos to start by themselves when muted,
+   so mute is set as a property before the source is attached, then play() is called directly.
+   If a browser still holds it back, it starts on the visitor's first scroll, tap or key press anywhere. */
+function startVideos(){
+  site.querySelectorAll(".media video").forEach(v => {
+    v.muted = true; v.defaultMuted = true; v.setAttribute("muted", "");
+    v.playsInline = true; v.loop = true; v.autoplay = true;
+    const fig = v.closest(".media");
+    const play = () => { const r = v.play(); if (r && r.catch) r.catch(() => {}); };
+    v.addEventListener("loadeddata", () => { fig.classList.add("playing"); play(); });
+    v.addEventListener("canplay", play);
+    v.addEventListener("pause", () => { if (!document.hidden) play(); });
+    if (!v.src) v.src = v.dataset.src;
+    play();
+  });
+}
+const kick = () => site.querySelectorAll(".media video").forEach(v => { if (v.paused) { const r = v.play(); if (r && r.catch) r.catch(() => {}); } });
+["scroll", "pointerdown", "keydown", "touchstart"].forEach(e => addEventListener(e, kick, { passive: true }));
+document.addEventListener("visibilitychange", () => { if (!document.hidden) kick(); });
+
+/* Font pairings (headings / body text). "default" keeps each template's own fonts. */
+const SS4 = "Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400";
+const FONTS = {
+  default:   { label: "Template default" },
+  ss_sans:   { label: "Source Serif 4 + Source Sans 3", q: SS4 + "&family=Source+Sans+3:wght@400;600;700", display: '"Source Serif 4", Georgia, serif', body: '"Source Sans 3", system-ui, sans-serif' },
+  ss_only:   { label: "Source Serif 4 (headings and text)", q: SS4, display: '"Source Serif 4", Georgia, serif', body: '"Source Serif 4", Georgia, serif' },
+  ss_plex:   { label: "Source Serif 4 + IBM Plex Sans", q: SS4 + "&family=IBM+Plex+Sans:wght@400;600;700", display: '"Source Serif 4", Georgia, serif', body: '"IBM Plex Sans", system-ui, sans-serif' },
+  ss_public: { label: "Source Serif 4 + Public Sans", q: SS4 + "&family=Public+Sans:wght@400;600;700", display: '"Source Serif 4", Georgia, serif', body: '"Public Sans", system-ui, sans-serif' },
+  ss_figtree:{ label: "Source Serif 4 + Figtree", q: SS4 + "&family=Figtree:wght@400;600;700", display: '"Source Serif 4", Georgia, serif', body: '"Figtree", system-ui, sans-serif' },
+  ss_nunito: { label: "Source Serif 4 + Nunito Sans", q: SS4 + "&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700", display: '"Source Serif 4", Georgia, serif', body: '"Nunito Sans", system-ui, sans-serif' },
+  ss_lato:   { label: "Source Serif 4 + Lato", q: SS4 + "&family=Lato:wght@400;700", display: '"Source Serif 4", Georgia, serif', body: '"Lato", system-ui, sans-serif' },
+  ss_worksans:{ label: "Source Serif 4 + Work Sans", q: SS4 + "&family=Work+Sans:wght@400;500;600", display: '"Source Serif 4", Georgia, serif', body: '"Work Sans", system-ui, sans-serif' },
+  sans_ss:   { label: "Source Sans 3 headings + Source Serif 4 text", q: SS4 + "&family=Source+Sans+3:wght@400;600;700", display: '"Source Sans 3", system-ui, sans-serif', body: '"Source Serif 4", Georgia, serif' },
+  plex_ss:   { label: "IBM Plex Sans headings + Source Serif 4 text", q: SS4 + "&family=IBM+Plex+Sans:wght@500;600;700", display: '"IBM Plex Sans", system-ui, sans-serif', body: '"Source Serif 4", Georgia, serif' },
+  lato: { group: "Other classic academic pairings", label: "Lato (the Jon Barron page font)", q: "Lato:wght@400;700", display: '"Lato", system-ui, sans-serif', body: '"Lato", system-ui, sans-serif' },
+  charis: { group: "Other classic academic pairings", label: "Charis SIL + Source Sans 3 (LaTeX feel)", q: "Charis+SIL:wght@400;700&family=Source+Sans+3:wght@400;600;700", display: '"Charis SIL", Georgia, serif', body: '"Source Sans 3", system-ui, sans-serif' },
+  charis_only: { group: "Other classic academic pairings", label: "Charis SIL (headings and text)", q: "Charis+SIL:ital,wght@0,400;0,700;1,400", display: '"Charis SIL", Georgia, serif', body: '"Charis SIL", Georgia, serif' },
+  garamond: { group: "Other classic academic pairings", label: "EB Garamond + Source Sans 3", q: "EB+Garamond:wght@400;600;700&family=Source+Sans+3:wght@400;600;700", display: '"EB Garamond", Georgia, serif', body: '"Source Sans 3", system-ui, sans-serif' },
+  crimson: { group: "Other classic academic pairings", label: "Crimson Pro (headings and text)", q: "Crimson+Pro:wght@400;600;700", display: '"Crimson Pro", Georgia, serif', body: '"Crimson Pro", Georgia, serif' },
+  newsreader: { group: "Other classic academic pairings", label: "Newsreader (headings and text)", q: "Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700", display: '"Newsreader", Georgia, serif', body: '"Newsreader", Georgia, serif' },
+  libre: { group: "Other classic academic pairings", label: "Libre Baskerville + Source Sans 3", q: "Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700", display: '"Libre Baskerville", Georgia, serif', body: '"Source Sans 3", system-ui, sans-serif' },
+  ptserif: { group: "Other classic academic pairings", label: "PT Serif + PT Sans", q: "PT+Serif:wght@400;700&family=PT+Sans:wght@400;700", display: '"PT Serif", Georgia, serif', body: '"PT Sans", system-ui, sans-serif' },
+  plex_both: { group: "Other classic academic pairings", label: "IBM Plex Serif + IBM Plex Sans", q: "IBM+Plex+Serif:wght@400;600;700&family=IBM+Plex+Sans:wght@400;600;700", display: '"IBM Plex Serif", Georgia, serif', body: '"IBM Plex Sans", system-ui, sans-serif' },
+  merri: { group: "Other classic academic pairings", label: "Merriweather + Open Sans", q: "Merriweather:wght@400;700&family=Open+Sans:wght@400;600;700", display: '"Merriweather", Georgia, serif', body: '"Open Sans", system-ui, sans-serif' },
+  noto: { group: "Other classic academic pairings", label: "Noto Serif + Noto Sans", q: "Noto+Serif:wght@400;600;700&family=Noto+Sans:wght@400;600;700", display: '"Noto Serif", Georgia, serif', body: '"Noto Sans", system-ui, sans-serif' },
+  alegreya: { group: "Other classic academic pairings", label: "Alegreya + Alegreya Sans", q: "Alegreya:wght@400;600;700&family=Alegreya+Sans:wght@400;500;700", display: '"Alegreya", Georgia, serif', body: '"Alegreya Sans", system-ui, sans-serif' },
+  spectral: { group: "Other classic academic pairings", label: "Spectral + Karla", q: "Spectral:wght@400;600;700&family=Karla:wght@400;600;700", display: '"Spectral", Georgia, serif', body: '"Karla", system-ui, sans-serif' },
+  lora: { group: "Other classic academic pairings", label: "Lora + Nunito Sans", q: "Lora:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700", display: '"Lora", Georgia, serif', body: '"Nunito Sans", system-ui, sans-serif' }
+};
+const loadedFonts = new Set();
+function applyFont(key){
+  const f = FONTS[key] || FONTS.default;
+  if (f.q && !loadedFonts.has(key)) {
+    const l = document.createElement("link"); l.rel = "stylesheet";
+    l.href = "https://fonts.googleapis.com/css2?family=" + f.q + "&display=swap";
+    document.head.appendChild(l); loadedFonts.add(key);
+  }
+  if (f.display) { site.style.setProperty("--display", f.display); site.style.setProperty("--body", f.body); }
+  else { site.style.removeProperty("--display"); site.style.removeProperty("--body"); }
+  const sel = document.getElementById("font-pick"); if (sel) sel.value = key;
+  try { localStorage.setItem("shira-font-v2", key); } catch (e) {}
+}
+const fontSel = document.getElementById("font-pick");
+{
+  const groups = {};
+  Object.entries(FONTS).forEach(([k, f]) => { const g = f.group || (k === "default" ? "" : "Source Serif 4 pairings"); (groups[g] = groups[g] || []).push(`<option value="${k}">${f.label}</option>`); });
+  fontSel.innerHTML = Object.entries(groups).map(([g, o]) => g ? `<optgroup label="${g}">${o.join("")}</optgroup>` : o.join("")).join("");
+}
+fontSel.addEventListener("change", () => applyFont(fontSel.value));
+
+/* Light, minimal color palettes. "default" keeps each template's own colors (with dark mode). */
+const PALETTES = {
+  default:  { label: "Template default" },
+  ink:      { label: "Ink blue",        bg:"#ffffff", fg:"#1d2127", muted:"#5f6670", line:"#e6e8eb", accent:"#1a56db", surface:"#f6f7f9" },
+  mono:     { label: "Black & white",   bg:"#ffffff", fg:"#141414", muted:"#666666", line:"#e6e6e6", accent:"#141414", surface:"#f6f6f6" },
+  navy:     { label: "Oxford navy",     bg:"#fdfdfd", fg:"#1c2230", muted:"#5b6475", line:"#e3e6ec", accent:"#0b2a5b", surface:"#f4f6f9" },
+  sky:      { label: "Sky blue",        bg:"#ffffff", fg:"#1b2330", muted:"#5d6878", line:"#e2e8ef", accent:"#0369a1", surface:"#f3f7fa" },
+  teal:     { label: "Slate teal",      bg:"#ffffff", fg:"#1e2528", muted:"#5e6b70", line:"#e2e8ea", accent:"#0f766e", surface:"#f3f7f7" },
+  forest:   { label: "Forest green",    bg:"#fcfdfc", fg:"#1b2420", muted:"#5c6a63", line:"#e1e8e4", accent:"#2f6b4f", surface:"#f3f7f5" },
+  burgundy: { label: "Burgundy",        bg:"#ffffff", fg:"#221d1f", muted:"#685f63", line:"#ece6e8", accent:"#8a1c3b", surface:"#f9f5f6" },
+  plum:     { label: "Plum",            bg:"#ffffff", fg:"#211d26", muted:"#655f6d", line:"#e9e5ee", accent:"#6b3fa0", surface:"#f7f5fa" },
+  graphite: { label: "Graphite + orange", bg:"#ffffff", fg:"#1f2124", muted:"#62666c", line:"#e5e6e8", accent:"#c2410c", surface:"#f6f6f7" },
+  stone:    { label: "Warm stone",      bg:"#fafaf9", fg:"#292524", muted:"#6b6560", line:"#e7e5e4", accent:"#44403c", surface:"#f3f2f1" }
+};
+const PAL_VARS = ["bg","fg","muted","line","accent","surface"];
+function applyPalette(key){
+  const p = PALETTES[key] || PALETTES.default;
+  if (p.bg) {
+    PAL_VARS.forEach(v => site.style.setProperty("--" + v, p[v]));
+    site.style.setProperty("--ph", p.surface); site.style.setProperty("--ph2", p.line);
+    site.style.colorScheme = "light";
+  } else {
+    PAL_VARS.concat(["ph","ph2"]).forEach(v => site.style.removeProperty("--" + v));
+    site.style.colorScheme = "";
+  }
+  const sel = document.getElementById("color-pick"); if (sel) sel.value = key;
+  try { localStorage.setItem("shira-colors", key); } catch (e) {}
+}
+const colorSel = document.getElementById("color-pick");
+colorSel.innerHTML = Object.entries(PALETTES).map(([k, p]) => `<option value="${k}">${p.label}</option>`).join("");
+colorSel.addEventListener("change", () => applyPalette(colorSel.value));
+
+function show(t, animate){
+  const render = () => {
+    site.dataset.tpl = t;
+    site.innerHTML = R[t]();
+    btns.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.tpl === t)));
+    document.getElementById("bar-desc").textContent = DESC[t];
+    wireCopy();
+    startVideos();
+    site.querySelectorAll(".photo img").forEach(i => { const bad = () => i.remove(); i.addEventListener("error", bad); if (i.complete && !i.naturalWidth) bad(); });
+    site.classList.remove("fading");
+  };
+  try { localStorage.setItem("shira-tpl", t); } catch (e) {}
+  if (animate && !matchMedia("(prefers-reduced-motion: reduce)").matches) { site.classList.add("fading"); setTimeout(render, 160); }
+  else render();
+}
+
+btns.forEach(b => b.addEventListener("click", () => { show(b.dataset.tpl, true); window.scrollTo({ top: 0 }); }));
+
+let start = TEMPLATE;
+if (!SHOW_PICKER) document.querySelector(".bar").hidden = true;
+else {
+  const h = location.hash.slice(1);
+  if (R[h]) start = h;
+  else { try { const s = localStorage.getItem("shira-tpl"); if (R[s]) start = s; } catch (e) {} }
+}
+show(start, false);
+let startFont = FONT;
+if (SHOW_PICKER) { try { const f = localStorage.getItem("shira-font-v2"); if (FONTS[f]) startFont = f; } catch (e) {} }
+applyFont(startFont);
+let startColors = COLORS;
+if (SHOW_PICKER) { try { const c = localStorage.getItem("shira-colors"); if (PALETTES[c]) startColors = c; } catch (e) {} }
+applyPalette(startColors);
+
+</script>
+
+</body>
+</html>
