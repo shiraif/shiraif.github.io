@@ -140,7 +140,7 @@ ul.plain{ list-style:none; margin:0; padding:0; display:flex; flex-direction:col
 .paper a.lnk{ color:var(--accent) }
 .paper a.lnk:hover{ text-decoration:underline }
 /* section buttons across the top; they stay in view while scrolling */
-html{ scroll-behavior:smooth }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; text-size-adjust:100% }
 @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto } }
 .p-nav{ position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg); border-bottom:1px solid var(--line); margin:-40px -16px 40px; padding:8px 12px }
 .p-nav-in{ max-width:868px; margin:0 auto; display:flex; gap:28px; padding:4px; overflow-x:auto; scrollbar-width:none }
@@ -154,7 +154,9 @@ html{ scroll-behavior:smooth }
 .p-pub.no-media{ grid-template-columns:1fr }
 .p-cols{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:48px }
 @media (max-width:680px){
-  .p-head{ grid-template-columns:100px minmax(0,1fr); column-gap:18px } .p-head h1{ font-size:1.9rem }
+  .p-head{ grid-template-columns:100px minmax(0,1fr); column-gap:18px } .p-head h1{ font-size:1.55rem }
+  .p-role{ font-size:.9rem } .paper .bio{ font-size:.95rem } .p-head .photo-cap{ font-size:.68rem }
+  .p-nav-in{ gap:12px; justify-content:space-between } .site a.p-btn{ font-size:.85rem }
   .p-pub{ grid-template-columns:1fr; gap:12px } .p-cols{ grid-template-columns:1fr }
 }
 
@@ -309,7 +311,7 @@ const P = {
 
 const PUBS = [
   { id:"stitch", title:"Video Stitching from Multiple Moving Cameras",
-    authors:["Shira Ifergane","Roy Amoyal","Shahar Benishay","Oren Freifeld"],
+    authors:["Shira Ifergane","Roy Amoyal","Shahar Ben Ishay","Oren Freifeld"],
     venue:"NeurIPS 2026", linksTbd:true, year:"2026", badge:"NeurIPS", media:"video", file:"media/video-stitching-teaser.mp4",
     tldr:"The first method for stitching videos from more than two freely moving cameras,<br>together with a new annotated multi-view video dataset and benchmark.",
     links:[["Paper", ""], ["Project page", ""], ["Dataset", ""], ["Code", ""]] },
@@ -366,7 +368,7 @@ const media = p => {
 };
 const photo = () => `<div class="photo-box"><div class="photo"><span>photo</span><img src="${P.photo}" alt="${P.name}"></div>${P.photoCaption ? `<p class="photo-cap">${P.photoCaption}</p>` : ""}</div>`;
 const authors = a => a.map(n => n === P.name ? `<b class="me">${n}</b>` : n).join(", ");
-const links = p => p.linksTbd ? `<p class="tbd">Paper, code and dataset links: TBD</p>` : `<div class="links">${p.links.map(([l, u]) => u ? `<a class="lnk" href="${u}" target="_blank" rel="noopener">${l}</a>` : `<span class="lnk" title="Add the ${l} link">${l}</span>`).join("")}</div>`;
+const links = p => p.linksTbd ? `<p class="tbd">Paper, code and dataset are coming soon </p>` : `<div class="links">${p.links.map(([l, u]) => u ? `<a class="lnk" href="${u}" target="_blank" rel="noopener">${l}</a>` : `<span class="lnk" title="Add the ${l} link">${l}</span>`).join("")}</div>`;
 const tldr = p => p.tldr ? `<p class="tldr">${p.tldr}</p>` : "";
 const rows = list => `<ul class="plain">${list.map(([a, w, s]) => `<li class="row"><span>${a}</span>${w ? `<span class="when">${w}</span>` : ""}${s ? `<span class="sub">${s}</span>` : ""}</li>`).join("")}</ul>`;
 /* logos shown instead of the link text; a link without a logo here shows its name */
