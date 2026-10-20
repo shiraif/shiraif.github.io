@@ -140,7 +140,7 @@ ul.plain{ list-style:none; margin:0; padding:0; display:flex; flex-direction:col
 .photo-box{ display:flex; flex-direction:column; gap:6px; min-width:0; max-width:100% }
 .photo-box .photo{ width:100% !important }
 .photo-cap{ font-size:.76rem; line-height:1.35; color:var(--muted); font-style:italic; text-align:center; font-family:var(--body) }
-.photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover }
+.photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top }  /* crop from the bottom, never the top */
 .photo span{ background:var(--bg); padding:2px 8px; border-radius:4px }
 
 /* ---------- Template 1: Paper ---------- */
@@ -308,7 +308,7 @@ html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; text-size-adjust:10
   </div></nav>
   <div class="paper">
     <header class="p-head" id="about">
-      <div class="photo-box"><div class="photo"><span>photo</span><img src="media/photo.jpg" alt="Shira Ifergane"></div><p class="photo-cap">The photo is upright.</p></div>
+      <div class="photo-box"><div class="photo"><span>photo</span><img src="media/photo.jpg" alt="Shira Ifergane"></div></div>
       <div>
         <h1>Shira Ifergane</h1>
         <p class="p-role">Computer Science Ph.D. student at Ben-Gurion University of the Negev</p>
@@ -365,7 +365,7 @@ const P = {
     "I am a Computer Science Ph.D. student at Ben-Gurion University of the Negev (BGU), working in The Vision, Inference, and Learning (VIL) Group under the supervision of <a href=\"https://www.orenfreifeld.com/\" target=\"_blank\" rel=\"noopener\">Prof. Oren Freifeld</a>."
   ],
   photo: "media/photo.jpg",
-  photoCaption: "The photo is upright.",
+  photoCaption: "",
   links: [["Google Scholar", "https://scholar.google.com/citations?user=sjDMed4AAAAJ&hl=en"], ["LinkedIn", "https://www.linkedin.com/in/shira-ifergane/"]]  /* put your URLs in the second slot */
 };
 
