@@ -10,7 +10,7 @@
 <meta property="og:title" content="Shira Ifergane">
 <meta property="og:description" content="Shira Ifergane is a Computer Science Ph.D. student at Ben-Gurion University of the Negev (VIL Group, advised by Prof. Oren Freifeld), working on computer vision and deep learning, including video stitching from multiple moving cameras (NeurIPS 2026).">
 <meta property="og:url" content="https://shiraif.github.io/">
-<meta property="og:image" content="https://shiraif.github.io/media/photo.jpg">
+<meta property="og:image" content="https://shiraif.github.io/media/photo1.jpg">
 <meta name="twitter:card" content="summary">
 <script type="application/ld+json">
 {
@@ -18,7 +18,7 @@
   "@type": "Person",
   "name": "Shira Ifergane",
   "url": "https://shiraif.github.io/",
-  "image": "https://shiraif.github.io/media/photo.jpg",
+  "image": "https://shiraif.github.io/media/photo1.jpg",
   "jobTitle": "Ph.D. Student in Computer Science",
   "affiliation": {
     "@type": "CollegeOrUniversity",
@@ -114,6 +114,7 @@ body{ background:var(--page); color:var(--ui-fg); font-family:var(--ui-font) }
 .links{ display:flex; flex-wrap:wrap; gap:6px }
 .lnk{ font-family:var(--mono); font-size:.74rem; letter-spacing:.02em; padding:3px 9px; border:1px dashed var(--line); border-radius:999px; color:var(--muted) }
 .tbd{ color:var(--muted); font-size:.88rem }
+.links .tbd{ align-self:center }
 a.lnk{ border-style:solid; color:var(--accent); text-decoration:none }
 .note{ font-size:.82rem; color:var(--muted) }
 ul.plain{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px }
@@ -140,13 +141,13 @@ ul.plain{ list-style:none; margin:0; padding:0; display:flex; flex-direction:col
 .photo-box{ display:flex; flex-direction:column; gap:6px; min-width:0; max-width:100% }
 .photo-box .photo{ width:100% !important }
 .photo-cap{ font-size:.76rem; line-height:1.35; color:var(--muted); font-style:italic; text-align:center; font-family:var(--body) }
-.photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top }  /* crop from the bottom, never the top */
+.photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top }
 .photo span{ background:var(--bg); padding:2px 8px; border-radius:4px }
 
 /* ---------- Template 1: Paper ---------- */
 .paper{ max-width:860px; margin:0 auto; display:flex; flex-direction:column; gap:64px }
 .p-head{ display:grid; grid-template-columns:145px minmax(0,1fr); column-gap:28px; row-gap:6px; align-items:center }
-.p-head .photo{ border-radius:6px; grid-column:1; grid-row:1 }
+.p-head .photo{ border-radius:6px; grid-column:1; grid-row:1; aspect-ratio:3/4 }  /* portrait frame: shows the whole photo */
 /* caption sits under the photo in its own row, so the name and links center on the photo alone */
 .p-head .photo-box{ display:contents }
 .p-head .photo-cap{ grid-column:1; grid-row:2; align-self:start }
@@ -159,6 +160,13 @@ ul.plain{ list-style:none; margin:0; padding:0; display:flex; flex-direction:col
 .site a.logo-link{ display:inline-flex; align-items:center; align-self:center; line-height:0 }
 .site a.logo-link svg{ width:20px; height:20px; fill:#666; transition:fill .15s }
 .site a.logo-link:hover svg{ fill:#333 }
+/* computer screens: the photo is as tall as the name + lines + icons; name starts at its top edge, icons sit on its bottom edge */
+@media (min-width:681px){
+  .p-head{ grid-template-columns:var(--photo-w, 96px) minmax(0,1fr) !important; align-items:stretch !important }
+  .p-head > div:last-child{ display:flex; flex-direction:column }
+  .p-head h1{ margin-top:-.2em }
+  .p-contact{ margin-top:auto !important; padding-top:10px }
+}
 .paper h2{ font-family:var(--display); font-size:1.35rem; font-weight:600; margin-bottom:18px }
 .paper .bio{ display:flex; flex-direction:column; gap:12px; max-width:75ch; font-size:1.02rem }
 .p-head + .bio{ margin-top:-24px }  /* About belongs with the header: 40px instead of the 64px section gap */
@@ -308,7 +316,7 @@ html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; text-size-adjust:10
   </div></nav>
   <div class="paper">
     <header class="p-head" id="about">
-      <div class="photo-box"><div class="photo"><span>photo</span><img src="media/photo.jpg" alt="Shira Ifergane"></div></div>
+      <div class="photo-box"><div class="photo"><span>photo</span><img src="media/photo1.jpg" alt="Shira Ifergane"></div></div>
       <div>
         <h1>Shira Ifergane</h1>
         <p class="p-role">Computer Science Ph.D. student at Ben-Gurion University of the Negev</p>
@@ -326,9 +334,9 @@ html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; text-size-adjust:10
       <code>media/video-stitching-teaser.mp4</code></div>
   </figure>
         <div class="txt"><h3><span class="p-num">1.</span>Video Stitching from Multiple Moving Cameras</h3><p class="authors"><b class="me">Shira Ifergane</b>, Roy Amoyal, Shahar Ben Ishay, Oren Freifeld</p>
-        <p class="p-venue ">NeurIPS 2026</p><p class="tldr">The first method for stitching videos from more than two freely moving cameras,<br>together with a new annotated multi-view video dataset and benchmark.</p><p class="tbd">Paper, code and dataset are coming soon</p></div></article><article class="p-pub no-media">
+        <p class="p-venue ">NeurIPS 2026</p><p class="tldr">The first method for stitching videos from more than two freely moving cameras,<br>together with a new annotated multi-view video dataset and benchmark.</p><div class="links"><a class="lnk" href="https://bgu-cs-vil.github.io/MViS-project/" target="_blank" rel="noopener">Project page</a><span class="tbd">Paper, code and dataset coming soon</span></div></div></article><article class="p-pub no-media">
         <div class="txt"><h3><span class="p-num">2.</span>Unsupervised Generation of Approximate Cross-Instance Semantic-Geometric Correspondences</h3><p class="authors">Roy Amoyal, <b class="me">Shira Ifergane</b>, Oren Freifeld</p>
-        <p class="p-venue ">NeurIPS 2026</p><p class="tbd">Paper and code are coming soon</p></div></article><article class="p-pub no-media">
+        <p class="p-venue ">NeurIPS 2026</p><div class="links"><a class="lnk" href="https://bgu-cs-vil.github.io/SemGeo-Gen/" target="_blank" rel="noopener">Project page</a><span class="tbd">Paper, code and dataset coming soon</span></div></div></article><article class="p-pub no-media">
         <div class="txt"><h3><span class="p-num">3.</span>FastJAM: a Fast Joint Alignment Model for Images</h3><p class="authors">Omri Hirsch*, Ron Shapira Weber*, <b class="me">Shira Ifergane</b>, Oren Freifeld</p>
         <p class="p-venue ">NeurIPS 2025</p><div class="links"><a class="lnk" href="https://arxiv.org/pdf/2510.22842" target="_blank" rel="noopener">Paper</a><a class="lnk" href="https://github.com/BGU-CS-VIL/FastJAM" target="_blank" rel="noopener">Code</a><a class="lnk" href="https://bgu-cs-vil.github.io/FastJAM/" target="_blank" rel="noopener">Project page</a></div></div></article><article class="p-pub no-media">
         <div class="txt"><h3><span class="p-num">4.</span>Trainable Highly-expressive Activation Functions</h3><p class="authors">Irit Chelly*, Shahaf E. Finder*, <b class="me">Shira Ifergane</b>, Oren Freifeld</p>
@@ -364,7 +372,7 @@ const P = {
   bio: [
     "I am a Computer Science Ph.D. student at Ben-Gurion University of the Negev (BGU), working in The Vision, Inference, and Learning (VIL) Group under the supervision of <a href=\"https://www.orenfreifeld.com/\" target=\"_blank\" rel=\"noopener\">Prof. Oren Freifeld</a>."
   ],
-  photo: "media/photo.jpg",
+  photo: "media/photo1.jpg",
   photoCaption: "",
   links: [["Google Scholar", "https://scholar.google.com/citations?user=sjDMed4AAAAJ&hl=en"], ["LinkedIn", "https://www.linkedin.com/in/shira-ifergane/"]]  /* put your URLs in the second slot */
 };
@@ -372,13 +380,13 @@ const P = {
 const PUBS = [
   { id:"stitch", title:"Video Stitching from Multiple Moving Cameras",
     authors:["Shira Ifergane","Roy Amoyal","Shahar Ben Ishay","Oren Freifeld"],
-    venue:"NeurIPS 2026", linksTbd:true, soon:"Paper, code and dataset are coming soon", year:"2026", badge:"NeurIPS", media:"video", file:"media/video-stitching-teaser.mp4",
+    venue:"NeurIPS 2026", soon:"Paper, code and dataset coming soon", year:"2026", badge:"NeurIPS", media:"video", file:"media/video-stitching-teaser.mp4",
     tldr:"The first method for stitching videos from more than two freely moving cameras,<br>together with a new annotated multi-view video dataset and benchmark.",
-    links:[["Paper", ""], ["Project page", ""], ["Dataset", ""], ["Code", ""]] },
+    links:[["Project page", "https://bgu-cs-vil.github.io/MViS-project/"]] },
   { id:"corr", title:"Unsupervised Generation of Approximate Cross-Instance Semantic-Geometric Correspondences",
     authors:["Roy Amoyal","Shira Ifergane","Oren Freifeld"],
-    venue:"NeurIPS 2026", linksTbd:true, soon:"Paper and code are coming soon", year:"2026", badge:"NeurIPS", media:"none",
-    links:[["Paper", ""], ["Code", ""]] },
+    venue:"NeurIPS 2026", soon:"Paper, code and dataset coming soon", year:"2026", badge:"NeurIPS", media:"none",
+    links:[["Project page", "https://bgu-cs-vil.github.io/SemGeo-Gen/"]] },
   { id:"fastjam", title:"FastJAM: a Fast Joint Alignment Model for Images",
     authors:["Omri Hirsch*","Ron Shapira Weber*","Shira Ifergane","Oren Freifeld"],
     venue:"NeurIPS 2025", year:"2025", badge:"NeurIPS", media:"none",
@@ -429,7 +437,12 @@ const media = p => {
 };
 const photo = () => `<div class="photo-box"><div class="photo"><span>photo</span><img src="${P.photo}" alt="${P.name}"></div>${P.photoCaption ? `<p class="photo-cap">${P.photoCaption}</p>` : ""}</div>`;
 const authors = a => a.map(n => n === P.name ? `<b class="me">${n}</b>` : n).join(", ");
-const links = p => p.linksTbd ? `<p class="tbd">${p.soon || "Links are coming soon"}</p>` : `<div class="links">${p.links.map(([l, u]) => u ? `<a class="lnk" href="${u}" target="_blank" rel="noopener">${l}</a>` : `<span class="lnk" title="Add the ${l} link">${l}</span>`).join("")}</div>`;
+const links = p => {
+  const real = (p.links || []).filter(([l, u]) => u);
+  const note = p.soon ? `<span class="tbd">${p.soon}</span>` : "";
+  if (!real.length) return note ? `<p class="tbd">${p.soon}</p>` : "";
+  return `<div class="links">${real.map(([l, u]) => `<a class="lnk" href="${u}" target="_blank" rel="noopener">${l}</a>`).join("")}${note}</div>`;
+};
 const tldr = p => p.tldr ? `<p class="tldr">${p.tldr}</p>` : "";
 const rows = list => `<ul class="plain">${list.map(([a, w, s]) => `<li class="row"><span>${a}</span>${w ? `<span class="when">${w}</span>` : ""}${s ? `<span class="sub">${s}</span>` : ""}</li>`).join("")}</ul>`;
 /* logos shown instead of the link text; a link without a logo here shows its name */
